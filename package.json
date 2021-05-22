@@ -2,13 +2,13 @@
   "name": "nombres",
   "version": "1.0.0",
   "description": "",
-  "main": "src/app.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node src/app.js"
+    "start": "node app.js"
   },
   "author": "ezcolombo@gmail.com",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "express": "^4.17.1"
   }
 }

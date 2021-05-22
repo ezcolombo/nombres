@@ -42,4 +42,4 @@ function getNames() {
   return
 }
 getNames()
-setInterval(() => { getNames() }, (w >= 1 ? w : 3) * 1000)
+setInterval(() => { getNames() }, (w >= 1 ? w : 5) * 1000)
