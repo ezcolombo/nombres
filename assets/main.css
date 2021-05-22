@@ -1,0 +1,16 @@
+body {
+  background-color: #000;
+}
+
+.strip {
+  font-family: 'Work Sans', sans-serif;
+  color: #fff;
+  text-align: center;
+  font-size: 4vw;
+}
+.footer {
+  font-family: 'Work Sans', sans-serif;
+  color: gray;
+  text-align: center;
+  font-size: 1vw;
+}
