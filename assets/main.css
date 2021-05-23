@@ -2,15 +2,48 @@ body {
   background-color: #000;
 }
 
-.strip {
+.name {
   font-family: 'Work Sans', sans-serif;
+  font-weight: 400;
   color: #fff;
   text-align: center;
-  font-size: 4vw;
+  font-size: 10vw;
 }
-.footer {
+
+.year {
   font-family: 'Work Sans', sans-serif;
-  color: gray;
+  font-weight: 200;
+  color: #fff;
   text-align: center;
+  font-size: 6vw;
+}
+
+.info {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 200;
+  color: #fff;
+  text-align: left;
+  font-size: 1.8vw;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.about {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 200;
+  color: #bbb;
+  text-align: left;
   font-size: 1vw;
+  margin-left: 75px;
+  margin-right: 50px;
+}
+
+a { 
+  font-family: 'Work Sans', sans-serif;
+  color: #bbb;
+}
+
+a:hover {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 400
 }

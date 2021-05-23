@@ -31,14 +31,23 @@ const loadParse = function (_f, callback) {
   })
 }
 
-const getNames = function (names, quantity = 1, callback) {
+const getNames = function (names, quantity, name, circa, callback) {
   if (!names || quantity === 0 || quantity > MAX_IN_SET) {
     return callback(new Error(`q params MUST be between 1 and ${MAX_IN_SET}`), null)
   }
   let nameset = []
+  let registry = names
+  
+  if (name) {
+    registry = registry.filter((n) => n.name === name)
+  }
+
+  if (circa) {
+    registry = registry.filter((n) => n.year === circa)
+  }
 
   for (let i = 0; i < quantity; ++i) {
-    nameset.push(names[getRandomMinMax(0, names.length -1)])
+    nameset.push(registry[getRandomMinMax(0, registry.length -1)])
   }
   
   callback(null, nameset)
@@ -55,18 +64,32 @@ loadParse(FILE, (error, names) => {
     
     app.use('/assets', express.static('assets'));
 
-    app.get('/',function(req,res) {
+    app.get('/', (req, res) => {
       res.sendFile(path.resolve('index.html'));
     })
     
     app.get('/api', (req, res) => {
       let quantity = 1
+      let name
+      let circa
       
       if (Number.isSafeInteger(Number(req.query.q))) {
         quantity = req.query.q
       }
+      
+      if (typeof(req.query.nombre) === 'string' 
+          && /(^[A-Za-z]+$)/.test(req.query.nombre)) {
 
-      getNames(namesObject, quantity, (error, data) => {
+          name = req.query.nombre
+      }
+      
+      if (Number.isSafeInteger(Number(req.query.circa))
+          && /(^[0-9][0-9][0-9][0-9]$)/.test(req.query.circa)) {
+
+          circa = req.query.circa
+      }
+
+      getNames(namesObject, quantity, name, circa, (error, data) => {
         if (error) {
           res.json({error: error.message})
         } else {
