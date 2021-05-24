@@ -4,6 +4,7 @@ const express = require('express')
 const FILE = path.resolve('data', 'historico-simples.json')
 const PORT = process.env.PORT || 8080
 const MAX_IN_SET = 5
+const TS  = () => {return String(new Date().toISOString())}
 
 let namesObject
 const app = express();
@@ -31,12 +32,12 @@ const loadParse = function (_f, callback) {
   })
 }
 
-const getNames = function (names, quantity, name, circa, callback) {
-  if (!names || quantity === 0 || quantity > MAX_IN_SET) {
+const getNames = function (nameset, quantity, name, circa, callback) {
+  if (!nameset || quantity === 0 || quantity > MAX_IN_SET) {
     return callback(new Error(`q params MUST be between 1 and ${MAX_IN_SET}`), null)
   }
-  let nameset = []
-  let registry = names
+  let result = []
+  let registry = nameset
   
   if (name) {
     registry = registry.filter((n) => n.name === name)
@@ -47,10 +48,17 @@ const getNames = function (names, quantity, name, circa, callback) {
   }
 
   for (let i = 0; i < quantity; ++i) {
-    nameset.push(registry[getRandomMinMax(0, registry.length -1)])
+    let pick = registry[getRandomMinMax(0, registry.length -1)]
+    let nset = nameset.filter((d)=> d.name === pick.name)
+
+    nset.sort((y, z) => {return y.count - z.count})
+    pick.topYear = nset[nset.length - 1].year
+    pick.topCount = nset[nset.length - 1].count
+
+    result.push(pick)
   }
   
-  callback(null, nameset)
+  callback(null, result)
 }
 
 loadParse(FILE, (error, names) => {
@@ -65,6 +73,8 @@ loadParse(FILE, (error, names) => {
     app.use('/assets', express.static('assets'));
 
     app.get('/', (req, res) => {
+      let src = req.headers['x-forwarded-for'] ? req.headers['x-forwarded-for'].split(/\s*,\s*/)[0] : req.socket.remoteAddress
+      console.log(TS() + ' GET / from: ' + src)
       res.sendFile(path.resolve('index.html'));
     })
     

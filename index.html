@@ -8,7 +8,20 @@
 <body>
 
 <table width="100%" height="100%" align="center">
- <tr height="80%"><td nowrap colspan="3"><div class="name" id="name"></div></td></tr>
+ <tr height="10%">
+  <td nowrap colspan="5">
+  <div class="help" id="help"></div>
+  </td>
+ </tr>
+
+ <tr height="70%">
+   <td nowrap colspan="5">
+     <div class="name" id="name" onmouseover="onDisplayOver()" 
+          onmouseleave="hideHelp()" onclick="onDisplayClick()">
+     </div>
+   </td>
+  </tr>
+
  <tr height="20%">
    <td width="33%"><div class="about" id="about">
      Listado histórico de los nombres (símples) registrados ante el <B>Registro 
@@ -17,19 +30,26 @@
      <A HREF="https://datos.gob.ar/dataset/otros-nombres-personas-fisicas/archivo/otros_2.1" target="blank">
      [ fuente ]</A>
    </td>
-   <td width="33%"><div class="year" id="year"></td>
+
+   <td width="33%" nowrap>
+     <table width="100%">
+       <tr>
+         <td width="50%"><div class="year">{</div></td>
+         <td>
+           <div class="year" id="year"  onmouseover="onYearOver()" onmouseleave="hideHelp()"
+                onclick="onYearClick()">
+         </td>
+         <td width="50%"><div class="year">}</div></td>
+       </tr>
+     </table>
+   </td>
+
    <td width="33%"><div class="info" id="info"></td>
-  </tr>
+ </tr>
+
 </table>
 
 <script src="/assets/renderer.js"></script>
 
 </body>
 </html>
-
-<!-- 
-<table width="100%" height="100%" align="center">
- <tr height="90%"><td nowrap><div class="strip" id="display"></div></td></tr>
- <tr height="10%"><td><div class="footer" id="foot"></td></tr>
-</table>
--->

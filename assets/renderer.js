@@ -3,6 +3,9 @@ let n  = url_params.get('nombre') || undefined
 let c  = url_params.get('circa') || undefined
 let w  = Number(url_params.get('delay'))
 
+let displayFilter = null
+let yearFilter = null
+
 let api = '/api?q=1'
 api = (n) ? `${api}&nombre=${n}` : api
 api = (c) ? `${api}&circa=${c}` : api
@@ -10,6 +13,7 @@ api = (c) ? `${api}&circa=${c}` : api
 let name = document.getElementById("name")
 let year = document.getElementById("year")
 let info = document.getElementById("info")
+let help = document.getElementById("help")
 
 function udateDisplay(data) {
 
@@ -17,8 +21,8 @@ function udateDisplay(data) {
     let peopleborn = (data[0].count == 1)? 'Sola persona nació' : 'Personas nacieron'
 
     name.innerText = `${data[0].name}`
-    year.innerText = `{ ${data[0].year} }`
-    info.innerText = `${data[0].count} ${peopleborn} en ${data[0].year} con el nombre de ${data[0].name}`
+    year.innerText = `${data[0].year}`
+    info.innerText = `${data[0].count} ${peopleborn} ese año con el nombre de ${data[0].name}, el cual tuvo su mayor popularidad en ${data[0].topYear} con ${data[0].topCount} registros.`
 
   } else {
     infoinnerText = JSON.stringify(data)
@@ -30,20 +34,65 @@ function udateDisplay(data) {
 function getNames(url) {
   fetch(url).then((response) => {
     if (response.status !== 200) {
-      console.log('Code: ' + response.status + 'Type: ' + response.type);
+      console.error('Code: ' + response.status + 'Type: ' + response.type);
       return;
     }
     
     response.json().then((data) => {
-        console.dir(data)
+        console.debug(data)
         udateDisplay(data)
       })
   
     }).catch(function(err) {
-      console.log('Error fetching API:', err);
+      console.error('Error fetching API:', err);
     })
   return
 }
 
+function onDisplayOver() {
+  if (displayFilter) {
+    help.innerText = 'haga click para volver al modo aleatorio'
+  } else {
+    help.innerText = 'haga click para fijar el nombre actual'
+  }
+  return
+}
+
+function onDisplayClick() {
+  if (displayFilter) {
+    api = api.replace(displayFilter, '')
+    displayFilter = null
+  } else {
+    displayFilter = `&nombre=${name.innerText}`
+    api = api.concat(displayFilter)
+  }
+  console.debug('onDisplayClick: ', api)
+  return
+}
+
+function onYearOver() {
+  if (yearFilter) {
+    help.innerText = 'haga click para volver al modo aleatorio'
+  } else {
+    help.innerText = 'haga click para fijar el año actual'
+  }
+  return
+}
+
+function onYearClick() {
+  if (yearFilter) {
+    api = api.replace(yearFilter, '')
+    yearFilter = null
+  } else {
+    yearFilter = `&circa=${year.innerText}`
+    api = api.concat(yearFilter)
+  }
+  console.debug('onYearClick: ', api)
+  return
+}
+
+
+function hideHelp() { help.innerText = ''}
+
 getNames(api)
-setInterval(() => { getNames(api) }, (w >= 1 ? w : 5) * 1000)
+setInterval(() => { getNames(api) }, (w >= 1 ? w : 10) * 1000)
