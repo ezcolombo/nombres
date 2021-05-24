@@ -1,14 +1,21 @@
-let url_params = (new URL(document.location)).searchParams;
-let n  = url_params.get('nombre') || undefined
-let c  = url_params.get('circa') || undefined
-let w  = Number(url_params.get('delay'))
-
-let displayFilter = null
+let nameFilter = null
 let yearFilter = null
-
 let api = '/api?q=1'
-api = (n) ? `${api}&nombre=${n}` : api
-api = (c) ? `${api}&circa=${c}` : api
+
+let params = (new URL(document.location)).searchParams;
+let n  = params.get('nombre') || undefined
+let c  = params.get('circa') || undefined
+let delay  = Number(params.get('delay'))
+
+if (n) {
+  nameFilter = `&nombre=${n}`
+  api = api + nameFilter
+}
+
+if (c) {
+  yearFilter = `&circa=${c}`
+  api = api + yearFilter
+}
 
 let name = document.getElementById("name")
 let year = document.getElementById("year")
@@ -50,7 +57,7 @@ function getNames(url) {
 }
 
 function onDisplayOver() {
-  if (displayFilter) {
+  if (nameFilter) {
     help.innerText = 'haga click para volver al modo aleatorio'
   } else {
     help.innerText = 'haga click para fijar el nombre actual'
@@ -59,15 +66,15 @@ function onDisplayOver() {
 }
 
 function onDisplayClick() {
-  if (displayFilter) {
-    api = api.replace(displayFilter, '')
-    displayFilter = null
+  if (nameFilter) {
+    api = api.replace(nameFilter, '')
+    nameFilter = null
   } else {
-    displayFilter = `&nombre=${name.innerText}`
-    api = api.concat(displayFilter)
+    nameFilter = `&nombre=${name.innerText}`
+    api = api.concat(nameFilter)
   }
   console.debug('onDisplayClick: ', api)
-  return
+  return getNames(api)
 }
 
 function onYearOver() {
@@ -88,11 +95,10 @@ function onYearClick() {
     api = api.concat(yearFilter)
   }
   console.debug('onYearClick: ', api)
-  return
+  return getNames(api)
 }
-
 
 function hideHelp() { help.innerText = ''}
 
 getNames(api)
-setInterval(() => { getNames(api) }, (w >= 1 ? w : 10) * 1000)
+setInterval(() => { getNames(api) }, (delay >= 1 ? delay : 10) * 1000)
