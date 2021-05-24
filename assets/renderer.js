@@ -2,10 +2,14 @@ let nameFilter = null
 let yearFilter = null
 let api = '/api?q=1'
 
-let params = (new URL(document.location)).searchParams;
-let n  = params.get('nombre') || undefined
-let c  = params.get('circa') || undefined
-let delay  = Number(params.get('delay'))
+const params = (new URL(document.location)).searchParams;
+const n  = params.get('nombre') || undefined
+const c  = params.get('circa') || undefined
+const delay  = Number(params.get('delay'))
+const INTERVAL = delay >= 1 ? delay : 10
+const progressChar = '_'
+
+let progress = INTERVAL
 
 if (n) {
   nameFilter = `&nombre=${n}`
@@ -21,6 +25,11 @@ let name = document.getElementById("name")
 let year = document.getElementById("year")
 let info = document.getElementById("info")
 let help = document.getElementById("help")
+
+function updateNextIn() {
+  timer.innerText = progressChar.repeat(progress)
+  return
+}
 
 function udateDisplay(data) {
 
@@ -68,9 +77,11 @@ function onDisplayOver() {
 function onDisplayClick() {
   if (nameFilter) {
     api = api.replace(nameFilter, '')
+    name.style.opacity = 1
     nameFilter = null
   } else {
     nameFilter = `&nombre=${name.innerText}`
+    name.style.opacity = 0.5
     api = api.concat(nameFilter)
   }
   console.debug('onDisplayClick: ', api)
@@ -89,9 +100,11 @@ function onYearOver() {
 function onYearClick() {
   if (yearFilter) {
     api = api.replace(yearFilter, '')
+    year.style.opacity = 1
     yearFilter = null
   } else {
     yearFilter = `&circa=${year.innerText}`
+    year.style.opacity = 0.5
     api = api.concat(yearFilter)
   }
   console.debug('onYearClick: ', api)
@@ -101,4 +114,14 @@ function onYearClick() {
 function hideHelp() { help.innerText = ''}
 
 getNames(api)
-setInterval(() => { getNames(api) }, (delay >= 1 ? delay : 10) * 1000)
+
+setInterval(() => { 
+  getNames(api)
+  progress = INTERVAL
+}, INTERVAL * 1000)
+
+setInterval(() => { 
+  --progress
+  updateNextIn()
+}, 1000)
+

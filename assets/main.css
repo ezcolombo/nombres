@@ -46,6 +46,15 @@ body {
   font-size: 1vw;
 }
 
+.timer {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 400;
+  color: #bbb;
+  text-align: center;
+  font-size: 1vw;
+  opacity: 0.50
+}
+
 a { 
   font-family: 'Work Sans', sans-serif;
   color: #bbb;
