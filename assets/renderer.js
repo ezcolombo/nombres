@@ -28,6 +28,16 @@ if (c) {
   year.style.opacity = 0.5
 }
 
+function switchTheme() {
+  let theme = document.getElementById("theme")
+  console.log('current theme:', theme.href)
+  if (theme.href.includes('dark')) {
+    theme.href = '/assets/light.css'
+  } else {
+    theme.href = '/assets/dark.css'
+  }
+}
+
 function updateNextIn() {
   timer.innerText = progressChar.repeat(progress)
   return

@@ -1,0 +1,83 @@
+body {
+  background-color: #000;
+}
+
+.name {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 400;
+  color: #fff;
+  text-align: center;
+  font-size: 10vw;
+  cursor: pointer;
+}
+
+.year {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 200;
+  color: #fff;
+  text-align: center;
+  font-size: 6vw;
+  cursor: pointer;
+}
+
+.info {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 200;
+  color: #fff;
+  text-align: left;
+  font-size: 1.25vw;
+  margin-left: 2vw;
+  margin-right: 2vw;
+}
+
+.about {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 200;
+  color: #bbb;
+  text-align: left;
+  font-size: 1vw;
+  margin-left: 2vw;
+  margin-right: 2vw;
+}
+
+.help {
+  visibility: hidden;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 400;
+  color: #000;
+  text-align: center;
+  font-size: 1.25vw;
+  border-radius: 100px 100px 100px 100px;
+  padding: 5px 0;
+  background: #fff;
+  opacity: 0.5;
+}
+
+.timer {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 400;
+  color: #bbb;
+  text-align: center;
+  font-size: 1vw;
+  opacity: 0.5;
+}
+
+.switch {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 400;
+  color: #bbb;
+  text-align: left;
+  font-size: 1.25vw;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+a { 
+  font-family: 'Work Sans', sans-serif;
+  color: #bbb;
+}
+
+a:hover {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 400
+}
