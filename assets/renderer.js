@@ -6,25 +6,27 @@ const params = (new URL(document.location)).searchParams;
 const n  = params.get('nombre') || undefined
 const c  = params.get('circa') || undefined
 const delay  = Number(params.get('delay'))
-const INTERVAL = delay >= 1 ? delay : 10
-const progressChar = '_'
+const INTERVAL = (delay >= 1 && delay <= 30) ? delay : 10
+const progressChar = '●' //♣ ■ ○ ●
 
 let progress = INTERVAL
-
-if (n) {
-  nameFilter = `&nombre=${n}`
-  api = api + nameFilter
-}
-
-if (c) {
-  yearFilter = `&circa=${c}`
-  api = api + yearFilter
-}
 
 let name = document.getElementById("name")
 let year = document.getElementById("year")
 let info = document.getElementById("info")
 let help = document.getElementById("help")
+
+if (n) {
+  nameFilter = `&nombre=${n}`
+  api = api + nameFilter
+  name.style.opacity = 0.5
+}
+
+if (c) {
+  yearFilter = `&circa=${c}`
+  api = api + yearFilter
+  year.style.opacity = 0.5
+}
 
 function updateNextIn() {
   timer.innerText = progressChar.repeat(progress)
@@ -39,6 +41,7 @@ function udateDisplay(data) {
     name.innerText = `${data[0].name}`
     year.innerText = `${data[0].year}`
     info.innerText = `${data[0].count} ${peopleborn} ese año con el nombre de ${data[0].name}, el cual tuvo su mayor popularidad en ${data[0].topYear} con ${data[0].topCount} registros.`
+    updateNextIn()
 
   } else {
     infoinnerText = JSON.stringify(data)
@@ -67,9 +70,11 @@ function getNames(url) {
 
 function onDisplayOver() {
   if (nameFilter) {
-    help.innerText = 'haga click para volver al modo aleatorio'
+    help.innerText = 'click para volver al modo aleatorio'
+    help.style.visibility = "visible"
   } else {
-    help.innerText = 'haga click para fijar el nombre actual'
+    help.innerText = 'click para fijar el nombre actual'
+    help.style.visibility = "visible"
   }
   return
 }
@@ -90,9 +95,11 @@ function onDisplayClick() {
 
 function onYearOver() {
   if (yearFilter) {
-    help.innerText = 'haga click para volver al modo aleatorio'
+    help.innerText = 'click para volver al modo aleatorio'
+    help.style.visibility = "visible"
   } else {
-    help.innerText = 'haga click para fijar el año actual'
+    help.innerText = 'click para fijar el año actual'
+    help.style.visibility = "visible"
   }
   return
 }
@@ -111,7 +118,10 @@ function onYearClick() {
   return getNames(api)
 }
 
-function hideHelp() { help.innerText = ''}
+function hideHelp() {
+  help.style.visibility = "hidden"
+  help.innerText = ''
+}
 
 getNames(api)
 

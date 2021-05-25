@@ -23,7 +23,7 @@ body {
   font-weight: 200;
   color: #fff;
   text-align: left;
-  font-size: 1.5vw;
+  font-size: 1.25vw;
   margin-left: 2vw;
   margin-right: 2vw;
 }
@@ -39,11 +39,16 @@ body {
 }
 
 .help {
+  visibility: hidden;
   font-family: 'Work Sans', sans-serif;
   font-weight: 400;
-  color: #bbb;
+  color: #000;
   text-align: center;
-  font-size: 1vw;
+  font-size: 1.25vw;
+  border-radius: 100px 100px 100px 100px;
+  padding: 5px 0;
+  background: #fff;
+  opacity: 0.5;
 }
 
 .timer {
@@ -52,7 +57,7 @@ body {
   color: #bbb;
   text-align: center;
   font-size: 1vw;
-  opacity: 0.50
+  opacity: 0.5;
 }
 
 a { 
