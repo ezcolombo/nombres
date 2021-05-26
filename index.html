@@ -1,9 +1,16 @@
 <html>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;400&display=swap" rel="stylesheet">
-<link id="theme" type="text/css" rel="stylesheet" href="/assets/dark.css">
+<head>
+  <title>nombres</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Nombres simples registrados en la Republica Argentina entre 1922 y 2015">
+  <meta name="keywords" content="nombre, nombres, nombres simples, argentina, renaper, registro">
+  <meta name="author" content="ezequiel colombo, ezcolombo@gmail.com">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;400&display=swap" rel="stylesheet">
+  <link id="theme" type="text/css" rel="stylesheet" href="/assets/dark.css">
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+</head>
 
 <body>
 
@@ -14,7 +21,11 @@
     <table width="100%" align="center">
       <tr>
         <td width="33%" nowrap><div class="switch" id="switch" onclick="switchTheme()">☼</div></td>
-        <td width="33%" nowrap><div class="timer" id="timer"></div></td>
+        <td width="33%" nowrap>
+          <div class="timer" id="timer">
+            <noscript>Lo sentimos ... debe habilitar Javascript en su navegador para poder visualizar correctamente</noscript>
+          </div>
+        </td>
         <td width="33%" nowrap><div class="help" id="help"></div></td>
       </tr>
     </table>
@@ -57,7 +68,7 @@
 
 </table>
 
-<script src="/assets/renderer.js"></script>
+<script src="/assets/renderer.js" defer integrity="sha384-+yuhz8ZRcQn9/aVY8q84ivAh+ufU0ed+gchXyIavvuCa3yLseNOUjN59KDkSEuEy"></script>
 
 </body>
 </html>

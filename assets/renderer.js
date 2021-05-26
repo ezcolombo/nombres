@@ -1,3 +1,8 @@
+/*
+  Sub-Resource Integrity (SRI) enabled.
+  openssl dgst -sha384 -binary renderer.js | openssl base64 -A
+*/
+
 let nameFilter = null
 let yearFilter = null
 let api = '/api?q=1'
@@ -8,6 +13,7 @@ const c  = params.get('circa') || undefined
 const delay  = Number(params.get('delay'))
 const INTERVAL = (delay >= 1 && delay <= 30) ? delay : 10
 const progressChar = '●' //♣ ■ ○ ●
+const API_ERROR_MSG = 'Error de comunicacion con la API :('
 
 let progress = INTERVAL
 
@@ -64,18 +70,33 @@ function getNames(url) {
   fetch(url).then((response) => {
     if (response.status !== 200) {
       console.error('Code: ' + response.status + 'Type: ' + response.type);
+      apiErrorAlert(true)
       return;
     }
     
     response.json().then((data) => {
         console.debug(data)
+        apiErrorAlert(false)
         udateDisplay(data)
       })
   
     }).catch(function(err) {
       console.error('Error fetching API:', err);
+      apiErrorAlert(true)
     })
   return
+}
+
+function apiErrorAlert(action) {
+  if (action) {
+    help.innerText = API_ERROR_MSG
+    help.style.visibility = "visible"
+  } else {
+    if (help.innerText === API_ERROR_MSG) {
+      help.style.visibility = "hidden"
+    }
+  }
+  return true
 }
 
 function onDisplayOver() {
@@ -144,4 +165,3 @@ setInterval(() => {
   --progress
   updateNextIn()
 }, 1000)
-
