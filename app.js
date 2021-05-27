@@ -73,8 +73,14 @@ loadParse(FILE, (error, names) => {
     app.use('/assets', express.static('assets'));
 
     app.get('/', (req, res) => {
-      let src = req.headers['x-forwarded-for'] ? req.headers['x-forwarded-for'].split(/\s*,\s*/)[0] : req.socket.remoteAddress
-      console.log(TS() + ' GET / from: ' + src)
+
+      let srcIP   = req.headers['x-forwarded-for'] ? req.headers['x-forwarded-for'].split(/\s*,\s*/)[0] : req.socket.remoteAddress
+      let country = req.headers['X-Appengine-Country'] || 'N/A'
+      let region  = req.headers['X-Appengine-Region'] || 'N/A'
+      let city    =['X-Appengine-City'] || 'N/A'
+      let latlon  = ['X-Appengine-CityLatLong'] || 'N/A'
+
+      console.log(`${TS()} GET / IP:${srcIP} Country:${country} Region:${region} City:${city} Lat-Lon:${latlon}`)
       res.sendFile(path.resolve('index.html'));
     })
     

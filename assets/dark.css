@@ -1,10 +1,10 @@
 body {
   background-color: #000;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 400;
 }
 
 .name {
-  font-family: 'Work Sans', sans-serif;
-  font-weight: 400;
   color: #fff;
   text-align: center;
   font-size: 10vw;
@@ -12,7 +12,6 @@ body {
 }
 
 .year {
-  font-family: 'Work Sans', sans-serif;
   font-weight: 200;
   color: #fff;
   text-align: center;
@@ -21,7 +20,6 @@ body {
 }
 
 .info {
-  font-family: 'Work Sans', sans-serif;
   font-weight: 200;
   color: #fff;
   text-align: left;
@@ -31,7 +29,6 @@ body {
 }
 
 .about {
-  font-family: 'Work Sans', sans-serif;
   font-weight: 200;
   color: #bbb;
   text-align: left;
@@ -42,8 +39,6 @@ body {
 
 .help {
   visibility: hidden;
-  font-family: 'Work Sans', sans-serif;
-  font-weight: 400;
   color: #000;
   text-align: center;
   font-size: 1.25vw;
@@ -54,8 +49,6 @@ body {
 }
 
 .timer {
-  font-family: 'Work Sans', sans-serif;
-  font-weight: 400;
   color: #bbb;
   text-align: center;
   font-size: 1vw;
@@ -63,8 +56,6 @@ body {
 }
 
 .switch {
-  font-family: 'Work Sans', sans-serif;
-  font-weight: 400;
   color: #bbb;
   text-align: left;
   font-size: 1.25vw;
@@ -73,11 +64,10 @@ body {
 }
 
 a { 
-  font-family: 'Work Sans', sans-serif;
   color: #bbb;
+  font-weight: 200;
 }
 
 a:hover {
-  font-family: 'Work Sans', sans-serif;
   font-weight: 400
 }
