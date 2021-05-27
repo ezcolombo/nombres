@@ -75,10 +75,10 @@ loadParse(FILE, (error, names) => {
     app.get('/', (req, res) => {
 
       let srcIP   = req.headers['x-forwarded-for'] ? req.headers['x-forwarded-for'].split(/\s*,\s*/)[0] : req.socket.remoteAddress
-      let country = req.headers['X-Appengine-Country'] || 'N/A'
-      let region  = req.headers['X-Appengine-Region'] || 'N/A'
-      let city    =['X-Appengine-City'] || 'N/A'
-      let latlon  = ['X-Appengine-CityLatLong'] || 'N/A'
+      let country = req.headers['x-appengine-country'] || 'N/A'
+      let region  = req.headers['x-appengine-region'] || 'N/A'
+      let city    = req.headers['x-appengine-city'] || 'N/A'
+      let latlon  = req.headers['x-appengine-citylatlong'] || 'N/A'
 
       console.log(`${TS()} GET / IP:${srcIP} Country:${country} Region:${region} City:${city} Lat-Lon:${latlon}`)
       res.sendFile(path.resolve('index.html'));
