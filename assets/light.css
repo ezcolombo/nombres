@@ -4,6 +4,11 @@ body {
   font-weight: 400;
 }
 
+@keyframes animate {
+  from {font-size: 1.25vw;}
+  to {font-size: 1.75vw; opacity: 1}
+}
+
 .name {
   color: #212529;
   text-align: center;
@@ -42,10 +47,11 @@ body {
   color: #f8f9fa;
   text-align: center;
   font-size: 1.25vw;
-  border-radius: 100px 100px 100px 100px;
+  border-radius: 50px;
   padding: 5px 0;
-  background: #212529;
-  opacity: 0.5;
+/*  background: #212529; */
+  background: rgba(33,37,41,.75)
+/*  opacity: 0.5; */
 }
 
 .timer {
@@ -56,6 +62,8 @@ body {
 }
 
 .switch {
+  animation-name: animate;
+  animation-duration: 1s;
   color: #383838;
   text-align: left;
   font-size: 1.25vw;
@@ -66,8 +74,10 @@ body {
 a { 
   font-weight: 200
   color: #383838;
+  text-decoration: none;
 }
 
 a:hover {
-  font-weight: 400
+  background: rgba(33,37,41,.75);
+  color: #f8f9fa;
 }
