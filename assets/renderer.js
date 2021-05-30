@@ -12,7 +12,7 @@ const n  = params.get('nombre') || undefined
 const c  = params.get('circa') || undefined
 const delay  = Number(params.get('delay'))
 const INTERVAL = (delay >= 1 && delay <= 30) ? delay : 10
-const progressChar = '●' //♣ ■ ○ ●
+const progressChar = '♣' //♣ ■ ○ ●
 const API_ERROR_MSG = 'Error de comunicacion con la API :('
 
 let progress = INTERVAL

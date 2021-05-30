@@ -3,7 +3,7 @@ const path = require('path')
 const express = require('express')
 const FILE = path.resolve('data', 'historico-simples.json')
 const PORT = process.env.PORT || 8080
-const MAX_IN_SET = 5
+const MAX_IN_SET = 50
 const TS  = () => {return String(new Date().toISOString())}
 
 let namesObject

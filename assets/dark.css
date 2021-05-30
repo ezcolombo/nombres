@@ -5,8 +5,8 @@ body {
 }
 
 @keyframes animate {
-  from {font-size: 1.25vw;}
-  to {font-size: 1.75vw; opacity: 1}
+  from {font-size: .5vw;}
+  to {font-size: 1.5vw; opacity: 1}
 }
 
 .name {
@@ -51,23 +51,24 @@ body {
   padding: 5px 0;
 /*  background: #fff; */
   background: rgba(255,255,255,.75)
-/*  opacity: 0.5; */
+/*  opacity: 0.75; */
 }
 
 .timer {
   color: #bbb;
   text-align: center;
   font-size: 1vw;
-  opacity: 0.5;
+  opacity: 0.75;
 }
 
 .switch {
   animation-name: animate;
-  animation-duration: 1s;
+  animation-duration: .5s;
+  margin-left: 2vw;
   color: #bbb;
   text-align: left;
   font-size: 1.25vw;
-  opacity: 0.5;
+  opacity: 0.75;
   cursor: pointer;
 }
 

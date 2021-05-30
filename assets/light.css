@@ -51,23 +51,24 @@ body {
   padding: 5px 0;
 /*  background: #212529; */
   background: rgba(33,37,41,.75)
-/*  opacity: 0.5; */
+/*  opacity: 0.75; */
 }
 
 .timer {
   color: #383838;
   text-align: center;
   font-size: 1vw;
-  opacity: 0.5;
+  opacity: 0.75;
 }
 
 .switch {
   animation-name: animate;
-  animation-duration: 1s;
+  animation-duration: .5s;
+  margin-left: 2vw;
   color: #383838;
   text-align: left;
   font-size: 1.25vw;
-  opacity: 0.5;
+  opacity: 0.75;
   cursor: pointer;
 }
 
