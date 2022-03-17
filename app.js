@@ -1,13 +1,25 @@
+const v8 = require('v8')
 const fs = require('fs')
 const path = require('path')
 const express = require('express')
 const FILE = path.resolve('data', 'historico-simples.json')
 const PORT = process.env.PORT || 8080
+const DEBUG = Boolean(process.env.DEBUG)
 const MAX_IN_SET = 50
 const TS  = () => {return String(new Date().toISOString())}
 
 let namesObject
 const app = express();
+
+const memUsage = function (label) {
+  const TS = () => new Date().toISOString()
+  const used = Math.floor(v8.getHeapStatistics().used_heap_size / (1024 * 1024))
+  const total = Math.floor(v8.getHeapStatistics().heap_size_limit / (1024 * 1024))
+  const perc = ((used / total) * 100).toFixed(0).padStart(3, ' ')
+
+  return `=> ${TS()} Heap[${perc}%](${used}/${total}) ${label}`
+}
+
 
 const getRandomMinMax = function (_min = 0, _max = Number.MAX_SAFE_INTEGER) {
   _min = Math.ceil(_min);
@@ -61,17 +73,16 @@ const getNames = function (nameset, quantity, name, circa, callback) {
   callback(null, result)
 }
 
-loadParse(FILE, (error, names) => {
+loadParse(FILE, (error, namesObject) => {
   if (error) {
     console.error(error)
     process.exit(1)
 
   } else {
-    console.log(`${names.length} Names Loaded from ${FILE}`)
-    namesObject = names
+    console.log(`${namesObject.length} Names Loaded from ${FILE}`)
+    DEBUG ? console.debug(memUsage('initial state')) : () => {}
     
     app.use('/assets', express.static('assets'));
-
     app.get('/', (req, res) => {
 
       let srcIP   = req.headers['x-forwarded-for'] ? req.headers['x-forwarded-for'].split(/\s*,\s*/)[0] : req.socket.remoteAddress
@@ -82,6 +93,8 @@ loadParse(FILE, (error, names) => {
 
       console.log(`${TS()} GET / IP:${srcIP} Country:${country} Region:${region} City:${city} Lat-Lon:${latlon}`)
       res.sendFile(path.resolve('index.html'));
+      
+      DEBUG ? console.debug(memUsage('/')) : () => {}
     })
     
     app.get('/api', (req, res) => {
@@ -112,7 +125,8 @@ loadParse(FILE, (error, names) => {
           res.json(data)
         }
       })
-
+      
+      DEBUG ? console.debug(memUsage(`${req.method} ${req.url}`)) : () => {}
     })
     
     app.listen(PORT, () => {

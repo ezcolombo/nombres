@@ -3,6 +3,7 @@
 FROM node:current-slim
 ENV NODE_ENV=production
 ENV PORT=8080
+ENV DEBUG=1
 
 WORKDIR nombres
 COPY ["package.json", "package-lock.json", "./"]
